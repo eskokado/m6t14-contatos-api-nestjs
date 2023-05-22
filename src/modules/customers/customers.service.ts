@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { Repository } from 'typeorm';
+import { CustomerEntity } from './entities/customer.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class CustomersService {
+  constructor(
+    @InjectRepository(CustomerEntity)
+    private customerRepository: Repository<CustomerEntity>,
+  ) {}
+
   create(createCustomerDto: CreateCustomerDto) {
     return 'This action adds a new customer';
   }
