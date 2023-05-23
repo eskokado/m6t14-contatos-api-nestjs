@@ -4,5 +4,4 @@ import { CreateCustomerDto } from './create-customer.dto';
 export class UpdateCustomerDto extends PartialType(CreateCustomerDto) {
   name: string;
   email: string;
-  password: string;
 }
