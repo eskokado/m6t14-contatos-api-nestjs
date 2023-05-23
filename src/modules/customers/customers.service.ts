@@ -26,7 +26,11 @@ export class CustomersService {
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} customer`;
+    return this.customerRepository.findOne({
+      where: {
+        id: id,
+      },
+    });
   }
 
   update(id: string, updateCustomerDto: UpdateCustomerDto) {
