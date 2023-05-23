@@ -38,7 +38,7 @@ export class CustomersService {
     return await this.findOne(id);
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} customer`;
+  async remove(id: string) {
+    await this.customerRepository.delete(id);
   }
 }
