@@ -12,29 +12,30 @@ export class CustomersService {
     private customerRepository: Repository<CustomerEntity>,
   ) {}
 
-  create(createCustomerDto: CreateCustomerDto) {
+  async create(createCustomerDto: CreateCustomerDto) {
     const { name, email, password } = createCustomerDto;
-    return this.customerRepository.save({
+    return await this.customerRepository.save({
       name,
       email,
       password,
     });
   }
 
-  findAll() {
-    return this.customerRepository.find();
+  async findAll() {
+    return await this.customerRepository.find();
   }
 
-  findOne(id: string) {
-    return this.customerRepository.findOne({
+  async findOne(id: string) {
+    return await this.customerRepository.findOne({
       where: {
         id: id,
       },
     });
   }
 
-  update(id: string, updateCustomerDto: UpdateCustomerDto) {
-    return `This action updates a #${id} customer`;
+  async update(id: string, updateCustomerDto: UpdateCustomerDto) {
+    await this.customerRepository.update(id, updateCustomerDto);
+    return await this.findOne(id);
   }
 
   remove(id: string) {
