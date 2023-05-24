@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CustomerEntity } from './modules/customers/entities/customer.entity';
 import { DataSource } from 'typeorm';
 import { ContactsModule } from './modules/contacts/contacts.module';
+import { ContactEntity } from './modules/contacts/entities/contact.entity';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { ContactsModule } from './modules/contacts/contacts.module';
       username: 'user',
       password: 'pass',
       database: 'database',
-      entities: [CustomerEntity],
+      entities: [CustomerEntity, ContactEntity],
       synchronize: true,
     }),
     ContactsModule,
