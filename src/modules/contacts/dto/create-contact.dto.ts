@@ -14,4 +14,5 @@ export class CreateContactDto {
     minNumbers: 1,
   })
   password: string;
+  customerId: string;
 }
