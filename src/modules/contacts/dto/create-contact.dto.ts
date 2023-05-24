@@ -14,5 +14,7 @@ export class CreateContactDto {
     minNumbers: 1,
   })
   password: string;
+
+  @IsString()
   customerId: string;
 }
