@@ -5,6 +5,7 @@ import { CustomersModule } from './modules/customers/customers.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CustomerEntity } from './modules/customers/entities/customer.entity';
 import { DataSource } from 'typeorm';
+import { ContactsModule } from './modules/contacts/contacts.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { DataSource } from 'typeorm';
       entities: [CustomerEntity],
       synchronize: true,
     }),
+    ContactsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
