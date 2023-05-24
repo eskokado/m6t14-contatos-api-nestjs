@@ -1,7 +1,9 @@
+import { ContactEntity } from 'src/modules/contacts/entities/contact.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -29,4 +31,7 @@ export class CustomerEntity {
 
   @UpdateDateColumn()
   updatedAt: string;
+
+  @OneToMany(() => ContactEntity, (contact) => contact.customer)
+  contacts: ContactEntity[];
 }
