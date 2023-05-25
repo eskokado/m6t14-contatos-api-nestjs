@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ContactEntity } from './entities/contact.entity';
+import { Contact } from './entities/contact.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class ContactsService {
   constructor(
-    @InjectRepository(ContactEntity)
-    private contactRepository: Repository<ContactEntity>,
+    @InjectRepository(Contact)
+    private contactRepository: Repository<Contact>,
   ) {}
 
   async create(createContactDto: CreateContactDto) {

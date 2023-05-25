@@ -1,19 +1,17 @@
 import { CreateCustomerDto } from '../dto/create-customer.dto';
 import { UpdateCustomerDto } from '../dto/update-customer.dto';
-import { CustomerEntity } from '../entities/customer.entity';
+import { Customer } from '../entities/customer.entity';
 
 export abstract class CustomerRepository {
-  abstract create(
-    data: CreateCustomerDto,
-  ): Promise<CustomerEntity> | CustomerEntity;
-  abstract findAll(): Promise<CustomerEntity[]> | CustomerEntity[];
+  abstract create(data: CreateCustomerDto): Promise<Customer> | Customer;
+  abstract findAll(): Promise<Customer[]> | Customer[];
   abstract findOne(
     id: string,
-  ): Promise<CustomerEntity | undefined> | CustomerEntity | undefined;
-  abstract findByEmail(email: string): Promise<CustomerEntity> | CustomerEntity;
+  ): Promise<Customer | undefined> | Customer | undefined;
+  abstract findByEmail(email: string): Promise<Customer> | Customer;
   abstract update(
     id: string,
     data: UpdateCustomerDto,
-  ): Promise<CustomerEntity> | CustomerEntity;
+  ): Promise<Customer> | Customer;
   abstract delete(id: string): Promise<void> | void;
 }

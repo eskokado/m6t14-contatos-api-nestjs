@@ -1,4 +1,4 @@
-import { CustomerEntity } from 'src/modules/customers/entities/customer.entity';
+import { Customer } from 'src/modules/customers/entities/customer.entity';
 import {
   Column,
   CreateDateColumn,
@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity('contacts')
-export class ContactEntity {
+export class Contact {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -32,6 +32,6 @@ export class ContactEntity {
   @UpdateDateColumn()
   updatedAt: string;
 
-  @ManyToOne(() => CustomerEntity, (customer) => customer.contacts)
-  customer: CustomerEntity;
+  @ManyToOne(() => Customer, (customer) => customer.contacts)
+  customer: Customer;
 }

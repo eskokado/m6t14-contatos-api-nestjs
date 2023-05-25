@@ -1,18 +1,16 @@
 import { CreateContactDto } from '../dto/create-contact.dto';
 import { UpdateContactDto } from '../dto/update-contact.dto';
-import { ContactEntity } from '../entities/contact.entity';
+import { Contact } from '../entities/contact.entity';
 
 export abstract class ContactRepository {
-  abstract create(
-    data: CreateContactDto,
-  ): Promise<ContactEntity> | ContactEntity;
-  abstract findAll(): Promise<ContactEntity[]> | ContactEntity[];
+  abstract create(data: CreateContactDto): Promise<Contact> | Contact;
+  abstract findAll(): Promise<Contact[]> | Contact[];
   abstract findOne(
     id: string,
-  ): Promise<ContactEntity | undefined> | ContactEntity | undefined;
+  ): Promise<Contact | undefined> | Contact | undefined;
   abstract update(
     id: string,
     data: UpdateContactDto,
-  ): Promise<ContactEntity> | ContactEntity;
+  ): Promise<Contact> | Contact;
   abstract delete(id: string): Promise<void> | void;
 }

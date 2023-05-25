@@ -3,10 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CustomersModule } from './modules/customers/customers.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CustomerEntity } from './modules/customers/entities/customer.entity';
+import { Customer } from './modules/customers/entities/customer.entity';
 import { DataSource } from 'typeorm';
 import { ContactsModule } from './modules/contacts/contacts.module';
-import { ContactEntity } from './modules/contacts/entities/contact.entity';
+import { Contact } from './modules/contacts/entities/contact.entity';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { ContactEntity } from './modules/contacts/entities/contact.entity';
       username: 'user',
       password: 'pass',
       database: 'database',
-      entities: [CustomerEntity, ContactEntity],
+      entities: [Customer, Contact],
       synchronize: true,
     }),
     ContactsModule,
