@@ -10,6 +10,7 @@ export abstract class CustomerRepository {
   abstract findOne(
     id: string,
   ): Promise<CustomerEntity | undefined> | CustomerEntity | undefined;
+  abstract findByEmail(email: string): Promise<CustomerEntity> | CustomerEntity;
   abstract update(
     id: string,
     data: UpdateCustomerDto,

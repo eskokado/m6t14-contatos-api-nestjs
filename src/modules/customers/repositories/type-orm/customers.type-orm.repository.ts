@@ -32,6 +32,14 @@ export class CustomerTypeOrmRepository implements CustomerRepository {
     });
   }
 
+  async findByEmail(email: string): Promise<CustomerEntity> {
+    return await this.customerRepository.findOne({
+      where: {
+        email,
+      },
+    });
+  }
+
   async update(id: string, data: UpdateCustomerDto): Promise<CustomerEntity> {
     await this.customerRepository.update(id, data);
     return await this.findOne(id);
