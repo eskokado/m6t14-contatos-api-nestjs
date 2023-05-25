@@ -38,7 +38,7 @@ export class CustomersService {
   }
 
   async findByEmail(email: string) {
-    const customer = await this.customersRepository.findOne(email);
+    const customer = await this.customersRepository.findByEmail(email);
     return customer;
   }
 
