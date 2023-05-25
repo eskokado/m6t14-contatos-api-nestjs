@@ -1,20 +1,22 @@
-import { Body, Controller, HttpStatus, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './local.auth.guard';
-import { response } from "express";
+import { ApiTags } from '@nestjs/swagger';
+import { LocalAuthGuard } from './local-auth.guard';
+import { LoginDTO } from './dto/login.dto';
 
 interface IUserLogin {
   email: string;
   password: string;
 }
 
-@Controller('login')
+@ApiTags('Auth')
+@Controller()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
-  @Post('')
-  async login(@Body() user: IUserLogin) {
-    const result = this.authService.login(user.email, user.password);
-    if (result == null) return response.status(HttpStatus.UNAUTHORIZED);
-    return result;
+
+  @Post('login')
+  @UseGuards(LocalAuthGuard)
+  async login(@Body() customer: LoginDTO) {
+    return this.authService.login(customer.email);
   }
 }

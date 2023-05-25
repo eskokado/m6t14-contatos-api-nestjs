@@ -12,8 +12,10 @@ import {
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { LocalAuthGuard } from '../auth/local.auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Customers')
 @Controller('customers')
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
@@ -24,19 +26,19 @@ export class CustomersController {
   }
 
   @Get()
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   findAll() {
     return this.customersService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string) {
     return this.customersService.findOne(id);
   }
 
   @Patch(':id')
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   update(
     @Param('id') id: string,
     @Body() updateCustomerDto: UpdateCustomerDto,
@@ -46,7 +48,7 @@ export class CustomersController {
 
   @Delete(':id')
   @HttpCode(204)
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     this.customersService.remove(id);
   }

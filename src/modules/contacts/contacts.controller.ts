@@ -11,8 +11,10 @@ import {
 import { ContactsService } from './contacts.service';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
-import { LocalAuthGuard } from '../auth/local.auth.guard';
+import { LocalAuthGuard } from '../auth/local-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Contacts')
 @Controller('contacts')
 @UseGuards(LocalAuthGuard)
 export class ContactsController {
