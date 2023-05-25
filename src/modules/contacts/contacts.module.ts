@@ -3,7 +3,7 @@ import { ContactsService } from './contacts.service';
 import { ContactsController } from './contacts.controller';
 import { ContactsRepository } from './repositories/contacts.repository';
 import { ContactsPrismaRepository } from './repositories/prisma/contacts-prisma.repository';
-import { PrismaService } from "../../database/prisma.service";
+import { PrismaService } from '../../database/prisma.service';
 
 @Module({
   imports: [],
