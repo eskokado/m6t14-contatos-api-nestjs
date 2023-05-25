@@ -1,17 +1,20 @@
 import { Module } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { CustomersController } from './customers.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Customer } from './entities/customer.entity';
-import { CustomerRepository } from './repositories/customers.repository';
-import { CustomerTypeOrmRepository } from './repositories/type-orm/customers.type-orm.repository';
+import { CustomersRepository } from "./repositories/customers.repository";
+import { PrismaService } from "../../database/prisma.service";
+import { CustomersPrismaRepository } from "./repositories/prisma/customers-prisma.repository";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Customer]), CustomerTypeOrmRepository],
   controllers: [CustomersController],
   providers: [
     CustomersService,
-    { provide: CustomerRepository, useClass: CustomerTypeOrmRepository },
+    PrismaService,
+    {
+      provide: CustomersRepository,
+      useClass: CustomersPrismaRepository,
+    },
   ],
+  exports: [CustomersService],
 })
 export class CustomersModule {}
