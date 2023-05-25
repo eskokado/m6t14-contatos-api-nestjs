@@ -1,40 +1,55 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { Repository } from 'typeorm';
-import { Customer } from './entities/customer.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CustomerRepository } from './repositories/customers.repository';
+import { CustomersRepository } from './repositories/customers.repository';
 
 @Injectable()
 export class CustomersService {
-  constructor(
-    @InjectRepository(Customer)
-    private customerRepository: CustomerRepository,
-  ) {}
+  constructor(private customersRepository: CustomersRepository) {}
+  async create(createCustomerDto: CreateCustomerDto) {
+    const findCustomer = await this.customersRepository.findByEmail(
+      createCustomerDto.email,
+    );
+    if (findCustomer) {
+      throw new ConflictException('Customer already exists');
+    }
+    const customer = await this.customersRepository.create(createCustomerDto);
 
-  async create(data: CreateCustomerDto) {
-    return await this.customerRepository.create(data);
+    return customer;
   }
 
   async findAll() {
-    return await this.customerRepository.findAll();
+    const customers = await this.customersRepository.findAll();
+    return customers;
   }
 
   async findOne(id: string) {
-    return await this.customerRepository.findOne(id);
+    const customer = await this.customersRepository.findOne(id);
+    if (!customer) {
+      throw new NotFoundException('Customer not found !');
+    }
+    return customer;
   }
 
   async findByEmail(email: string) {
-    return await this.customerRepository.findByEmail(email);
+    const customer = await this.customersRepository.findOne(email);
+    return customer;
   }
 
   async update(id: string, updateCustomerDto: UpdateCustomerDto) {
-    await this.customerRepository.update(id, updateCustomerDto);
-    return await this.findOne(id);
+    const customer = await this.customersRepository.update(
+      id,
+      updateCustomerDto,
+    );
+    return customer;
   }
 
   async remove(id: string) {
-    await this.customerRepository.delete(id);
+    await this.customersRepository.delete(id);
+    return;
   }
 }
