@@ -28,7 +28,15 @@ export class CustomersService {
   async findOne(id: string) {
     return await this.customerRepository.findOne({
       where: {
-        id: id,
+        id,
+      },
+    });
+  }
+
+  async findByEmail(email: string) {
+    return await this.customerRepository.findOne({
+      where: {
+        email,
       },
     });
   }
