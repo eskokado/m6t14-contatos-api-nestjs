@@ -1,10 +1,17 @@
-import { IsEmail, IsString, IsStrongPassword } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsString,
+  IsStrongPassword,
+} from 'class-validator';
 
 export class CreateContactDto {
   @IsString()
+  @IsNotEmpty()
   name: string;
 
   @IsEmail()
+  @IsNotEmpty()
   email: string;
 
   @IsStrongPassword({
@@ -16,5 +23,6 @@ export class CreateContactDto {
   password: string;
 
   @IsString()
+  @IsNotEmpty()
   customerId: string;
 }
