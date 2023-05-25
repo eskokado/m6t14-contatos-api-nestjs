@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { CustomersController } from './customers.controller';
-import { CustomersRepository } from "./repositories/customers.repository";
-import { PrismaService } from "../../database/prisma.service";
-import { CustomersPrismaRepository } from "./repositories/prisma/customers-prisma.repository";
+import { PrismaService } from '../../database/prisma.service';
+import { CustomersRepository } from './repositories/customers.repository';
+import { CustomersPrismaRepository } from './repositories/prisma/customers-prisma.repository';
 
 @Module({
   controllers: [CustomersController],

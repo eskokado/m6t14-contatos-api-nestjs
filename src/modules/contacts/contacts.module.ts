@@ -1,12 +1,20 @@
 import { Module } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { ContactsController } from './contacts.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Contact } from './entities/contact.entity';
+import { ContactsRepository } from './repositories/contacts.repository';
+import { ContactsPrismaRepository } from './repositories/prisma/contacts-prisma.repository';
+import { PrismaService } from "../../database/prisma.service";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Contact])],
+  imports: [],
   controllers: [ContactsController],
-  providers: [ContactsService],
+  providers: [
+    ContactsService,
+    PrismaService,
+    {
+      provide: ContactsRepository,
+      useClass: ContactsPrismaRepository,
+    },
+  ],
 })
 export class ContactsModule {}

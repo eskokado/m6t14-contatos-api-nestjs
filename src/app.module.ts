@@ -10,6 +10,4 @@ import { ContactsModule } from './modules/contacts/contacts.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  constructor(private dataSource: DataSource) {}
-}
+export class AppModule {}
