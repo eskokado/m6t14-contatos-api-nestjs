@@ -5,18 +5,20 @@ import { CustomersModule } from '../customers/customers.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './local.strategy';
-import { PrismaService } from '../../database/prisma.service';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
     CustomersModule,
     PassportModule,
     JwtModule.register({
-      secret: process.env.SECRET_KEY,
-      signOptions: { expiresIn: '7 days' },
+      secret: 'mysecret',
+      signOptions: {
+        expiresIn: '7 days',
+      },
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, PrismaService],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}
