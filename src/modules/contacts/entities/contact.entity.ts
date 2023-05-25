@@ -1,37 +1,19 @@
-import { Customer } from 'src/modules/customers/entities/customer.entity';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Exclude } from 'class-transformer';
+import { randomUUID } from 'crypto';
 
-@Entity('contacts')
 export class Contact {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  readonly id: string;
 
-  @Column({
-    unique: true,
-  })
   name: string;
 
-  @Column({
-    unique: true,
-  })
   email: string;
 
-  @Column()
+  @Exclude()
   password: string;
 
-  @CreateDateColumn()
-  createdAt: string;
+  customer_id: string;
 
-  @UpdateDateColumn()
-  updatedAt: string;
-
-  @ManyToOne(() => Customer, (customer) => customer.contacts)
-  customer: Customer;
+  constructor() {
+    this.id = randomUUID();
+  }
 }
