@@ -6,18 +6,20 @@ import {
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { CustomersRepository } from './repositories/customers.repository';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class CustomersService {
   constructor(private customersRepository: CustomersRepository) {}
-  async create(createCustomerDto: CreateCustomerDto) {
-    const findCustomer = await this.customersRepository.findByEmail(
-      createCustomerDto.email,
-    );
+  async create(data: CreateCustomerDto) {
+    const findCustomer = await this.customersRepository.findByEmail(data.email);
+
+    data.password = await bcryptPassword(data.password);
+
     if (findCustomer) {
       throw new ConflictException('Customer already exists');
     }
-    const customer = await this.customersRepository.create(createCustomerDto);
+    const customer = await this.customersRepository.create(data);
 
     return customer;
   }
@@ -40,11 +42,9 @@ export class CustomersService {
     return customer;
   }
 
-  async update(id: string, updateCustomerDto: UpdateCustomerDto) {
-    const customer = await this.customersRepository.update(
-      id,
-      updateCustomerDto,
-    );
+  async update(id: string, data: UpdateCustomerDto) {
+    if (data.password) data.password = await bcryptPassword(data.password);
+    const customer = await this.customersRepository.update(id, data);
     return customer;
   }
 
@@ -52,4 +52,12 @@ export class CustomersService {
     await this.customersRepository.delete(id);
     return;
   }
+}
+
+const bcryptPassword = async (password: string) => {
+  const salt = await bcrypt.genSalt();
+
+  const hash = await bcrypt.hash(password, salt);
+
+  return hash;
 }

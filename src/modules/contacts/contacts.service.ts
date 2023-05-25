@@ -6,18 +6,22 @@ import {
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
 import { ContactsRepository } from './repositories/contacts.repository';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class ContactsService {
   constructor(private contactsRepository: ContactsRepository) {}
-  async create(createContactDto: CreateContactDto) {
+  async create(data: CreateContactDto) {
     const findContact = await this.contactsRepository.findByEmail(
-      createContactDto.email,
+      data.email,
     );
     if (findContact) {
       throw new ConflictException('Contact already exists');
     }
-    const contact = await this.contactsRepository.create(createContactDto);
+
+    data.password = await bcryptPassword(data.password);
+
+    const contact = await this.contactsRepository.create(data);
 
     return contact;
   }
@@ -40,11 +44,9 @@ export class ContactsService {
     return contact;
   }
 
-  async update(id: string, updateContactDto: UpdateContactDto) {
-    const contact = await this.contactsRepository.update(
-      id,
-      updateContactDto,
-    );
+  async update(id: string, data: UpdateContactDto) {
+    if (data.password) data.password = await bcryptPassword(data.password);
+    const contact = await this.contactsRepository.update(id, data);
     return contact;
   }
 
@@ -52,4 +54,12 @@ export class ContactsService {
     await this.contactsRepository.delete(id);
     return;
   }
+}
+
+const bcryptPassword = async (password: string) => {
+  const salt = await bcrypt.genSalt();
+
+  const hash = await bcrypt.hash(password, salt);
+
+  return hash;
 }
