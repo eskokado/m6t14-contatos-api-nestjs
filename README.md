@@ -18,6 +18,9 @@ O POC foi concluído com sucesso, demonstrando a viabilidade da criação de uma
 
 [Frontend](https://github.com/eskokado/m6t14-contatos-reactjs) framework TypeScript starter repository.
 
+## Copiar .env_example para .env
+
+
 ## Docker Mysql
 
 ```
