@@ -12,7 +12,6 @@ export class AuthService {
 
   async validateCustomer(email: string, password: string) {
     const customer = await this.customersService.findByEmail(email);
-    console.log('passou aqui', customer);
     if (customer) {
       const passwordMatch = await compare(password, customer.password);
       if (passwordMatch) {
