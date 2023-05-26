@@ -52,6 +52,8 @@ $ npm run start:prod
 - Author: Edson Shideki Kokado - [Linkedin](https://www.linkedin.com/in/edson-shideki-kokado/) 
 | [Github](https://github.com/eskokado/) 
 | [Portfólio](https://eskcti.com.br)
+- Projeto: [Github](https://github.com/eskokado/m6t14-contatos-api-nestjs)
+- Frontend: [Github](https://github.com/eskokado/m6t14-contatos-reactjs)
 
 ## License
 
