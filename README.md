@@ -21,7 +21,7 @@ O POC foi concluído com sucesso, demonstrando a viabilidade da criação de uma
 ## Docker Mysql
 
 ```
-docker-compose up -d
+$ docker-compose up -d
 ```
 
 ## Installation
@@ -43,10 +43,9 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Swagger
+## Swagger - local
 
-[Documentação](https://localhost:3000/api)
-
+[Documentação](http://localhost:3000/api)
 
 ## Stay in touch
 
