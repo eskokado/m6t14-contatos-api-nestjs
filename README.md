@@ -18,8 +18,16 @@ O POC foi concluído com sucesso, demonstrando a viabilidade da criação de uma
 
 [Frontend](https://github.com/eskokado/m6t14-contatos-reactjs) framework TypeScript starter repository.
 
-## Copiar .env_example para .env
+## Installation
 
+```bash
+$ npm install
+```
+
+## preparar .env
+```
+Copiar .env_example para .env
+```
 
 ## Docker Mysql
 
@@ -27,10 +35,9 @@ O POC foi concluído com sucesso, demonstrando a viabilidade da criação de uma
 $ docker-compose up -d
 ```
 
-## Installation
-
-```bash
-$ npm install
+## migration
+```
+$ npx prisma migrate dev
 ```
 
 ## Running the app
