@@ -28,6 +28,9 @@ export class CustomersPrismaRepository implements CustomersRepository {
   async findOne(id: string): Promise<Customer> {
     const customer = await this.prisma.customer.findUnique({
       where: { id },
+      include: {
+        contacts: true,
+      }
     });
     return plainToInstance(Customer, customer);
   }
