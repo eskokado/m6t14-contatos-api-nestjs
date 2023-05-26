@@ -37,6 +37,7 @@ $ docker-compose up -d
 
 ## migration
 ```
+$ npx prisma generate
 $ npx prisma migrate dev
 ```
 
