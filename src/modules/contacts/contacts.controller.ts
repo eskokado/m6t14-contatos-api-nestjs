@@ -11,12 +11,12 @@ import {
 import { ContactsService } from './contacts.service';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
-import { LocalAuthGuard } from '../auth/local-auth.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('Contacts')
 @Controller('contacts')
-@UseGuards(LocalAuthGuard)
+@UseGuards(JwtAuthGuard)
 export class ContactsController {
   constructor(private readonly contactsService: ContactsService) {}
 
