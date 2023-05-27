@@ -5,7 +5,9 @@ import { UpdatePhonesCustomerDto } from './dto/update-phones-customer.dto';
 
 @Controller('phones-customers')
 export class PhonesCustomersController {
-  constructor(private readonly phonesCustomersService: PhonesCustomersService) {}
+  constructor(
+    private readonly phonesCustomersService: PhonesCustomersService,
+  ) {}
 
   @Post()
   create(@Body() createPhonesCustomerDto: CreatePhonesCustomerDto) {
@@ -19,16 +21,16 @@ export class PhonesCustomersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.phonesCustomersService.findOne(+id);
+    return this.phonesCustomersService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePhonesCustomerDto: UpdatePhonesCustomerDto) {
-    return this.phonesCustomersService.update(+id, updatePhonesCustomerDto);
+    return this.phonesCustomersService.update(id, updatePhonesCustomerDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.phonesCustomersService.remove(+id);
+    return this.phonesCustomersService.remove(id);
   }
 }
