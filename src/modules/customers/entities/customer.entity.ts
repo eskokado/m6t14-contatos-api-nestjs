@@ -8,7 +8,6 @@ export class Customer {
 
   email: string;
 
-  @Exclude()
   password: string;
 
   constructor() {
