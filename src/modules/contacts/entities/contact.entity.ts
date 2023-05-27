@@ -13,6 +13,8 @@ export class Contact {
 
   customer_id: string;
 
+  createdAt: string;
+
   constructor() {
     this.id = randomUUID();
   }
