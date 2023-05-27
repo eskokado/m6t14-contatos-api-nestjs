@@ -11,11 +11,12 @@ datasource db {
 }
 
 model Customer {
-  id       String    @id
-  name     String
-  email    String    @unique
-  password String
-  contacts Contact[]
+  id        String    @id
+  name      String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  contacts  Contact[]
 
   @@map("customers")
 }
@@ -26,6 +27,7 @@ model Contact {
   email      String   @unique
   password   String
   customer   Customer @relation(fields: [customerId], references: [id])
+  createdAt  DateTime @default(now())
   customerId String
 
   @@map("contacts")
