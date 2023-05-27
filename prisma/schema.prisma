@@ -38,7 +38,7 @@ model Contact {
 model PhoneCustomer {
   id         String   @id
   name       String
-  phone      String
+  number     String
   customerId String
   customer   Customer @relation(fields: [customerId], references: [id])
 }
@@ -46,7 +46,7 @@ model PhoneCustomer {
 model PhoneContact {
   id        String  @id
   name      String
-  phone     String
+  number    String
   contactId String
   contact   Contact @relation(fields: [contactId], references: [id])
 }
