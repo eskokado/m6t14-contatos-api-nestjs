@@ -22,14 +22,26 @@ export class CustomersPrismaRepository implements CustomersRepository {
     return plainToInstance(Customer, newCustomer);
   }
   async findAll(): Promise<Customer[]> {
-    const customers = await this.prisma.customer.findMany();
+    const customers = await this.prisma.customer.findMany({
+      include: {
+        contacts: {
+          include: {
+            phones: true,
+          },
+        },
+      },
+    });
     return plainToInstance(Customer, customers);
   }
   async findOne(id: string): Promise<Customer> {
     const customer = await this.prisma.customer.findUnique({
       where: { id },
       include: {
-        contacts: true,
+        contacts: {
+          include: {
+            phones: true,
+          },
+        },
       },
     });
     return plainToInstance(Customer, customer);
