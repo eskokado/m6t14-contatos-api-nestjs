@@ -29,6 +29,7 @@ export class CustomersPrismaRepository implements CustomersRepository {
             phones: true,
           },
         },
+        phones: true,
       },
     });
     return plainToInstance(Customer, customers);
@@ -42,6 +43,7 @@ export class CustomersPrismaRepository implements CustomersRepository {
             phones: true,
           },
         },
+        phones: true,
       },
     });
     return plainToInstance(Customer, customer);
