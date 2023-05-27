@@ -1,26 +1,39 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from "@nestjs/common";
 import { CreatePhonesCustomerDto } from './dto/create-phones-customer.dto';
 import { UpdatePhonesCustomerDto } from './dto/update-phones-customer.dto';
+import { PhonesCustomersRepository } from './repositories/phones-customers.repository';
 
 @Injectable()
 export class PhonesCustomersService {
-  create(createPhonesCustomerDto: CreatePhonesCustomerDto) {
-    return 'This action adds a new phonesCustomer';
+  constructor(
+    private readonly phonesCustomersRepository: PhonesCustomersRepository,
+  ) {}
+  async create(data: CreatePhonesCustomerDto) {
+    const phoneCustomer = await this.phonesCustomersRepository.create(data);
+
+    return phoneCustomer;
   }
 
-  findAll() {
-    return `This action returns all phonesCustomers`;
+  async findAll() {
+    const phoneCustomers = await this.phonesCustomersRepository.findAll();
+    return phoneCustomers;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} phonesCustomer`;
+  async findOne(id: string) {
+    const phoneCustomer = await this.phonesCustomersRepository.findOne(id);
+    if (!phoneCustomer) {
+      throw new NotFoundException('Phone Customer not found !');
+    }
+    return phoneCustomer;
   }
 
-  update(id: number, updatePhonesCustomerDto: UpdatePhonesCustomerDto) {
-    return `This action updates a #${id} phonesCustomer`;
+  async update(id: string, data: UpdatePhonesCustomerDto) {
+    const phoneCustomer = await this.phonesCustomersRepository.update(id, data);
+    return phoneCustomer;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} phonesCustomer`;
+  async remove(id: string) {
+    await this.phonesCustomersRepository.delete(id);
+    return;
   }
 }
