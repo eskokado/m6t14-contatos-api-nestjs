@@ -12,14 +12,10 @@ import * as bcrypt from 'bcrypt';
 export class ContactsService {
   constructor(private contactsRepository: ContactsRepository) {}
   async create(data: CreateContactDto) {
-    const findContact = await this.contactsRepository.findByEmail(
-      data.email,
-    );
+    const findContact = await this.contactsRepository.findByEmail(data.email);
     if (findContact) {
       throw new ConflictException('Contact already exists');
     }
-
-    data.password = await bcryptPassword(data.password);
 
     const contact = await this.contactsRepository.create(data);
 
@@ -45,7 +41,6 @@ export class ContactsService {
   }
 
   async update(id: string, data: UpdateContactDto) {
-    if (data.password) data.password = await bcryptPassword(data.password);
     const contact = await this.contactsRepository.update(id, data);
     return contact;
   }
@@ -62,4 +57,4 @@ const bcryptPassword = async (password: string) => {
   const hash = await bcrypt.hash(password, salt);
 
   return hash;
-}
+};

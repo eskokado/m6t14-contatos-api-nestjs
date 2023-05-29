@@ -26,7 +26,6 @@ model Contact {
   id         String         @id
   name       String
   email      String         @unique
-  password   String
   customer   Customer       @relation(fields: [customerId], references: [id])
   createdAt  DateTime       @default(now())
   customerId String
